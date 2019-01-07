@@ -1,0 +1,20 @@
+1. Install omniorb.  Omniidl should be available on the path.  On ubuntu:
+	apt-get install omniorb omniidl libomniorb4-dev
+   Install java.  On ubuntu:
+	apt-get install openjdk-11-jdk
+
+2. Type 'make'
+
+3. Run server.
+
+	$ ./server 
+	
+Note the nicely quoted connection string it pukes out.  It should start with IOR and go on for a while.
+
+4. Run the client.
+
+	$ ./client 'connection-string-goes-here' 'string-to-reverse' 
+	
+in another window.  
+
+

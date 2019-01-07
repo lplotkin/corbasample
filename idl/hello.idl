@@ -1,0 +1,3 @@
+interface hello {
+	string sayHello(in string msg);
+};
