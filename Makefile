@@ -3,6 +3,9 @@ C_FLAGS :=
 
 BIN		:= bin
 SRC		:= src
+JAVA		:= $(SRC)/java
+IDLSRC		:= idl/hello.idl
+JAVAIDL		:= $(JAVA)/helloHelper.java $(JAVA)/helloHolder.java $(JAVA)/hello.java $(JAVA)/helloOperations.java $(JAVA)/_helloStub.java
 GEN		:= generated
 IDLH		:= $(GEN)/hello.hh 
 IDLSK		:= $(GEN)/helloSK.cc
@@ -16,13 +19,17 @@ LIBRARIES	:= -lomniORB4 -lomnithread
 all: bin/server bin/client
 
 clean:
-	$(RM) $(BIN)/* $(GEN)/*
+	$(RM) $(BIN)/* $(GEN)/* $(JAVA)/*.class $(JAVAIDL)
 
 run: all
 	./$(BIN)/server
 
-$(IDLH) $(IDLSK): idl/hello.idl
-	omniidl -bcxx -Cgenerated idl/hello.idl
+java: $(IDLSRC)
+	idlj -td $(JAVA) $(IDLSRC)
+	javac src/java/*.java
+
+$(IDLH) $(IDLSK): $(IDLSRC)
+	omniidl -bcxx -Cgenerated $(IDLSRC)
 
 $(BIN)/server: $(SSRC) $(IDLH)
 	$(CC) $(C_FLAGS) $(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)

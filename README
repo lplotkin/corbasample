@@ -1,7 +1,5 @@
 1. Install omniorb.  Omniidl should be available on the path.  On ubuntu:
 	apt-get install omniorb omniidl libomniorb4-dev
-   Install java.  On ubuntu:
-	apt-get install openjdk-11-jdk
 
 2. Type 'make'
 
@@ -16,5 +14,16 @@ Note the nicely quoted connection string it pukes out.  It should start with IOR
 	$ ./client 'connection-string-goes-here' 'string-to-reverse' 
 	
 in another window.  
+
+
+Java part (optional)
+
+1. Install java.  You'll *NEED* JDK-1.7 to compile and run without dicking around with modules.  Make sure java -version reports jdk 1.7.  Also make sure the server part from above is running.
+   
+2. Type 'make java'
+
+3. Run the client.
+
+   $ java -cp src/java client 'connection-string-goes-here' 'string-to-reverse'
 
 
